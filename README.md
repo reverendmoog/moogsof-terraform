@@ -1,4 +1,4 @@
-# moogsoft_integration
+# cloud-terraform
 
 ## apiKey
 Add apiKey to `apikey.tfvars`
