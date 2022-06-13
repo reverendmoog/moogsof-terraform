@@ -14,10 +14,12 @@ variable "apiKey" {
     sensitive = true
 }
 
+# Read a catalog from a csv file
 variable filename {
   default = "catalog.csv"
 }
 
+# Parse the csv file
 locals {
   contents = csvdecode(file(var.filename))
 }
@@ -60,7 +62,7 @@ resource "restapi_object" "test_catalog" {
   })
 }
 
-# Add a document (row) to the catalog
+# Add a documents (rows) to the catalog
 resource "restapi_object" "test_document" {
   path = "/catalogs/${restapi_object.test_catalog.id}/documents"
   read_path = "/catalogs/${restapi_object.test_catalog.id}/documents"
