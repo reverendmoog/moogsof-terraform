@@ -2,5 +2,5 @@
 .terraform.lock.hcl
 terraform.tfstate
 terraform.tfstate.backup
-apikey.tfvars
+apikey.auto.tfvars
 local/

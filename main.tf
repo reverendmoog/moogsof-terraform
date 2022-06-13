@@ -14,6 +14,14 @@ variable "apiKey" {
     sensitive = true
 }
 
+variable filename {
+  default = "catalog.csv"
+}
+
+locals {
+  contents = csvdecode(file(var.filename))
+}
+
 # Configure the provider
 provider "restapi" {
   uri                   = "https://api.moogsoft.ai/v2"
@@ -57,8 +65,11 @@ resource "restapi_object" "test_document" {
   path = "/catalogs/${restapi_object.test_catalog.id}/documents"
   read_path = "/catalogs/${restapi_object.test_catalog.id}/documents"
   id_attribute = "data"
+
+  for_each = { for item in local.contents : item.source => item }
+
   data = jsonencode({
-    source = "barney"
-    service = "pebbles"
+    source = each.value.source
+    service = each.value.service
   })
 }
