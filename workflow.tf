@@ -25,6 +25,5 @@ resource "restapi_object" "test_workflow" {
         }
       }
     ]
-    status = "RUNNING"
   })
 }
