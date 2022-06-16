@@ -49,3 +49,19 @@ resource "restapi_object" "test_document" {
     service = each.value.service
   })
 }
+
+
+# Add documents (rows) to the catalog
+resource "restapi_object" "test_document" {
+  provider = restapi.v2
+  path         = "/catalogs/${restapi_object.test_catalog.id}/documents"
+  read_path    = "/catalogs/${restapi_object.test_catalog.id}/documents"
+  id_attribute = "data"
+
+  for_each = { for item in local.documents : item.source => item }
+
+  data = jsonencode({
+    source  = each.value.source
+    service = each.value.service
+  })
+}

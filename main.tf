@@ -4,16 +4,14 @@ terraform {
     restapi = {
       source  = "fmontezuma/restapi"
       version = "1.14.1"
-    }
-    restapiV2 = {
-      source  = "fmontezuma/restapi"
-      version = "1.14.1"
+      configuration_aliases = [ restapi.v2 ]
     }
   }
 }
 
 # Configure the provider
 provider "restapi" {
+  alias  = "v2"
   uri                   = "https://api.moogsoft.ai/v2"
   debug                 = true
   write_returns_object  = true
@@ -27,7 +25,7 @@ provider "restapi" {
   }
 }
 
-provider "restapiV2" {
+provider "restapi" {
   uri                   = "https://api.moogsoft.ai"
   debug                 = true
   write_returns_object  = true
