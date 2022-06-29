@@ -24,18 +24,7 @@ resource "restapi_object" "test_workflow" {
           outputFieldName = "tags.nginx_webserver"
         }
       }
-    ]
+    ],
+    status = "RUNNING"
   })
-}
-
-resource "null_resource" "enable_test_workflow" {
-  provisioner "local-exec" {
-    command = <<EOT
-      curl -o /tmp/curlout \
-        -XPATCH https://api.moogsoft.ai/v1/workflows/${restapi_object.test_workflow.id}/status \
-        -H 'Content-Type: application/json' \
-        -H 'apiKey: ${var.apiKey}' \
-        -d '{\"status\": \"RUNNING\"}'
-EOT
-  }
 }
