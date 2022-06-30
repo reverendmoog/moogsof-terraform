@@ -2,8 +2,8 @@
 terraform {
   required_providers {
     restapi = {
-      source                = "fmontezuma/restapi"
-      version               = "1.14.1"
+      source                = "mastercard/restapi"
+      version               = "1.17.0"
       configuration_aliases = [restapi.v1, restapi.v2]
     }
   }
